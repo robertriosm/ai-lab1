@@ -13,14 +13,14 @@ class Problem(ABC):
 
         self.goal = []
 
-        for x in self.graph:
-            for y in x:
-                if y == 2:
+        for x in range(len(self.graph)):
+            for y in range(len(self.graph)):
+                if self.graph[x][y] == 2:
                     self.initial = (x,y)
-                if y == 3:
+                if self.graph[x][y] == 3:
                     self.goal.append((x,y))
         
-        self.actual = set(self.initial)
+        self.actual = self.initial
 
         
     

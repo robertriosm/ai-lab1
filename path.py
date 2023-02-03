@@ -16,7 +16,7 @@ class Path:
         pass
 
 
-    def add_step():
-        pass
+    def add_step(self, v):
+        self.states.append(v)
 
     

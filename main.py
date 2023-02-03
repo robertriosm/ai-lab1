@@ -2,6 +2,7 @@ from PIL import Image
 from image_scan import *
 from matplotlib.image import imread
 from numpy import zeros, random, uint8
+from BFS import BFS
 
 
 original = Image.open("lab1.bmp")
@@ -24,4 +25,16 @@ for x in range(dim):
         image_map[x][y] = check_bit(image[x][y])
 
 # crear BFS
+bfs = BFS(image_map)
+
+# print
+
+
+print(bfs)
+
+print('\n\n')
+
+print(bfs.initial)
+print(bfs.actual)
+print(bfs.goal)
 

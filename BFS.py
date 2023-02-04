@@ -76,7 +76,7 @@ class BFS(Problem):
                     return self.graph
 
                 self.graph[x][y] = 4 # cuatro es camino
-                print(self.graph, "\n\n")
+                print('\n'.join([' '.join([str(int(cell)) for cell in row]) for row in self.graph]))
 
                 for i,j in self.actions((x,y)):
                     if not self.is_explored(explored,i,j):
@@ -90,8 +90,8 @@ class BFS(Problem):
 
 
     def __repr__(self) -> str:
-        # return '\n'.join(['\t'.join([str(cell) for cell in row]) for row in self.graph])
-        return ''
+        return '\n'.join([' '.join([str(int(cell)) for cell in row]) for row in self.graph])
+        # return ''
 
 
         

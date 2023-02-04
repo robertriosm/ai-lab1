@@ -37,4 +37,4 @@ print("final ejecucion...")
 
 
 print(bfs)
-print("finaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaa aaaal")
+print("finaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaal")

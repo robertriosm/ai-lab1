@@ -26,15 +26,15 @@ for x in range(dim):
 
 # crear BFS
 bfs = BFS(image_map)
-
-# print
-
+print("separacionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
 
 print(bfs)
 
-print('\n\n')
 
-print(bfs.initial)
-print(bfs.actual)
-print(bfs.goal)
+print("inicio ejecucion...")
+bfs.bfs()
+print("final ejecucion...")
 
+
+print(bfs)
+print("finaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaafinaaaaaaaaaaaaaaaaaaaaaa aaaal")

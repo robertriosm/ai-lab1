@@ -2,7 +2,7 @@
 
 from problem import Problem
 from path import Path
-from queue import Queue
+# from queue import Queue
 
 
 class BFS(Problem):
@@ -10,62 +10,14 @@ class BFS(Problem):
 
     def __init__(self, graph) -> None:
         super().__init__(graph)
-        self.marked = [False for i in range(len(self.graph)**2)]
         self.path = Path(self.actual)
-        
- 
-
-
-    def actions(self, s, a):
-        """
-        hay 4 tipos de movimientos:
-        up ⬆️
-        right ➡️
-        down ⬇️
-        left ⬅️
-        """
-
-        if a == 'u':
-            # up
-            try:
-                if self.graph[s[0]+1][s[1]] != 0:
-                    return self.graph[s[0]+1][s[1]]
-            except Exception:
-                pass
-
-
-        if a == 'r':
-            # right
-            try:
-                if self.graph[s[0]][s[1]+1] != 0:
-                    return self.graph[s[0]][s[1]+1]
-            except Exception:
-                pass
-
-
-
-        if a == 'd':
-            # down
-            try:
-                if self.graph[s[0]-1][s[1]] != 0:
-                    return self.graph[s[0]-1][s[1]]
-            except Exception:
-                pass
-            
-
-
-        if a == 'l':
-            # left
-            try:
-                if self.graph[s[0]][s[1]-1] != 0:
-                    return self.graph[s[0]][s[1]-1]
-            except Exception:
-                pass
-
-            
 
 
     def result(self, s):
+        return super().result(s)
+
+
+    def actions(self, s):
         """
         hay 4 tipos de movimientos:
         up ⬆️
@@ -74,42 +26,25 @@ class BFS(Problem):
         left ⬅️
         """
 
-        r = []
+        x = s[0]
+        y = s[1]
 
-        # up
-        try:
-            if self.graph[s[0]+1][s[1]] != 0:
-                r.append(self.graph[s[0]+1][s[1]])
-        except Exception:
-            pass
-        
-        # down
-        try:
-            if self.graph[s[0]-1][s[1]] != 0:
-                r.append(self.graph[s[0]-1][s[1]])
-        except Exception:
-            pass
+        dirs = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
 
-        # left
-        try:
-            if self.graph[s[0]][s[1]-1] != 0:
-                r.append(self.graph[s[0]][s[1]-1])
-        except Exception:
-            pass
 
-        # right
-        try:
-            if self.graph[s[0]][s[1]+1] != 0:
-                r.append(self.graph[s[0]][s[1]+1])
-        except Exception:
-            pass
+        return [(x, y) for x,y in dirs if self.is_valid((x,y)) and self.graph[x][y] != 0 ]
 
-        return r
+ 
+
+    def is_valid(self, s):
+        return s[0] >= 0 and s[1] >= 0 and s[0] < len(self.graph) and s[1] < len(self.graph[0])
     
 
 
-    def goal_test(self, s):
-        return super().goal_test(s)
+    def goal_test(self,s):
+        for goal in self.goal:
+            if goal[0] == s[0] and goal[1] == s[1]:
+                return True
 
 
     
@@ -120,44 +55,54 @@ class BFS(Problem):
 
     def path_cost(self, ss: list):
         return super().path_cost(ss)
-    
 
 
-    def visit(self, v):
-        self.path.add_step(v)
+
+    def is_explored(self, l:list,x,y):
+        return (x,y) in l
 
 
 
     def bfs(self):
-        queue = [self.actual]
-        while len(queue) > 0:
-            v = queue.pop(0)
-            if not self.marked[v]: 
-                self.visit(v)
-                self.marked[v] = True
-                for w in self.result(v):
-                    if not self.marked[w]:
-                        queue.append(w)
+        queue = [self.initial]
+        explored = []
+        
+        while True:
+            if len(queue) > 0:    
+                x,y = self.remove_choice(queue)
+                explored.append((x,y))
 
+                if self.goal_test((x,y)):
+                    return self.graph
 
+                self.graph[x][y] = 4 # cuatro es camino
+                print(self.graph, "\n\n")
+
+                for i,j in self.actions((x,y)):
+                    if not self.is_explored(explored,i,j):
+                        queue.append((i,j))
+                
+            else:
+                return False
+
+            # return self.graph
 
 
 
     def __repr__(self) -> str:
-        r = ""
-        for i in self.graph:
-            r = r + str(i) + "\n"
-        return r
+        # return '\n'.join(['\t'.join([str(cell) for cell in row]) for row in self.graph])
+        return ''
 
 
+        
 
-    def remove_choice():
-        return Path()
+    def remove_choice(self, queue:list):
+        return queue.pop(0)
+
+ 
 
 
-
-
-
+"""
 def graph_search(problem:Problem):
     frontier = [Path([problem.initial])]
     explored = []
@@ -183,16 +128,4 @@ def graph_search(problem:Problem):
             return False
 
 
-
-
-def criteria(list:list):
-    pass
-
-
-
-def is_explored(path,result,explored):
-    pass
-
-
-
-
+"""

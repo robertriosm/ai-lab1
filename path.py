@@ -9,7 +9,7 @@ class Path:
             self.states = [initial]
         else:
             self.states = []
-        self.end = 0
+        self.end = ""
 
     
     def extend_from():

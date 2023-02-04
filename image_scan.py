@@ -21,7 +21,7 @@ def check_bit(bit:array):
     if bit[0] < 120 and bit[1] > 200 and bit[2] < 120:
         return 3 # goal
     
-    # si no es ninguno, se asume pared
-    return 0
+    # si no es ninguno, se asume camino
+    return 1
 
 
